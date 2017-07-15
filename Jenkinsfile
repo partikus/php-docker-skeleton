@@ -12,6 +12,7 @@ def getRunners(debug = false) {
 
     for (String version : phpVersions) {
         runners["${version}"] = {
+            checkout scm
             sh "./docker.sh build ${version} ${debug}"
         }
     }
