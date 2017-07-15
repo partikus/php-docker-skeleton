@@ -1,14 +1,18 @@
 #!/usr/bin/env groovy
 
-def phpVersions = ['56', '70', '71']
+def phpVersions() {
+
+    return ['56', '70', '71']
+}
+
 
 def getRunners(debug = false) {
+    def phpVersions = phpVersions();
     def runners = [:]
 
-    for (String phpVersion : phpVersions) {
-        def v = version
-        runners["${v}"] = {
-            sh "./docker.sh build ${v} ${debug}"
+    for (String version : phpVersions) {
+        runners["${version}"] = {
+            sh "./docker.sh build ${version} ${debug}"
         }
     }
 
